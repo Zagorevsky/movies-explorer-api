@@ -1,6 +1,6 @@
 const {
   PORT = 3000,
-  DB_ADDRESS = 'mongodb://localhost:27017/authdemo',
+  DB_ADDRESS = 'mongodb://localhost:27017/bitfilmsdb',
   JWT_SECRET = 'jwtsecret',
 } = process.env;
 
