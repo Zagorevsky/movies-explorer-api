@@ -1,9 +1,9 @@
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
 
 const allowedCors = [
-  'http://84.201.135.24',
-  'http://zagor.students.nomoredomains.work',
-  'https://zagor.students.nomoredomains.work',
+  'http://178.154.223.233',
+  'http://kino-exp.students.nomoredomains.xyz',
+  'https://kino-exp.students.nomoredomains.xyz',
 ];
 
 module.exports = (req, res, next) => {
