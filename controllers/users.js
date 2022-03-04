@@ -13,7 +13,7 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (user) {
-        res.status(200).send(user);
+        res.status(200).send({ name: user.name, email: user.email });
       }
       throw new NotFoundError('Пользователь не найден');
     })
@@ -46,7 +46,7 @@ module.exports.updateUser = (req, res, next) => {
   User
     .findByIdAndUpdate(req.user._id, { name, email }, { new: true })
     .then((user) => {
-      res.send(user);
+      res.send({ name: user.name, email: user.email });
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {

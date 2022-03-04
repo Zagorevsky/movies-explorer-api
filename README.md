@@ -5,7 +5,7 @@
 
 # movies-explorer server
 
-#### Домен приложения: https://kino-exp.students.nomoredomains.xyz
+#### Домен приложения: https://api.kino-exp.students.nomoredomains.xyz
 #### Публичный IP: http://178.154.223.233 (логин: pboul-ooo)
 
 ## Применяемые технологии
