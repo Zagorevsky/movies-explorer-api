@@ -3,10 +3,11 @@ const NotFoundError = require('../errors/not-found-err');
 const ForbiddenError = require('../errors/forbidden-err');
 const BadRequestError = require('../errors/bad-request-err');
 
-// получение всех фильмов
+// получение всех фильмов пользователя
 module.exports.getMovies = (req, res, next) => {
+  const owner = req.user._id;
   Movie
-    .find({})
+    .find(owner)
     .then((movies) => res.status(200).send(movies))
     .catch(next);
 };

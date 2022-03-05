@@ -1,5 +1,6 @@
 const errorHandler = ((err, req, res, next) => {
-  res.status(err.status || 500).send({ message: err.status === 500 ? 'Ошибка сервера' : err.message });
+  const { status = 500 } = err;
+  res.status(status).send({ message: status === 500 ? 'Ошибка сервера' : err.message });
   next();
 });
 

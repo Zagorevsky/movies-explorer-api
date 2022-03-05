@@ -10,7 +10,7 @@ const urlValidation = (value) => {
 
 module.exports.validateUser = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required().min(8),
   }),
@@ -34,7 +34,7 @@ module.exports.validateMovie = celebrate({
     trailerLink: Joi.string().custom(urlValidation).required(),
     thumbnail: Joi.string().custom(urlValidation).required(),
     owner: Joi.string().hex().length(24),
-    movieId: Joi.string().hex().length(24),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
