@@ -50,7 +50,9 @@ module.exports.updateUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'));
+        next(new BadRequestError('Неправильная почта или пароль'));
+      } if (err.code === 11000) {
+        throw new ConflictError('Пользователь с таким email уже существует');
       } else { next(err); }
     });
 };

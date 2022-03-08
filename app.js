@@ -13,16 +13,12 @@ const errorHandler = require('./middlewares/error-handler');
 const { PORT, DB_ADDRESS } = require('./config');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const corsHandler = require('./middlewares/allowedCors');
+const routes = require('./routes');
 
 const app = express();
 mongoose.connect(DB_ADDRESS, () => {
   console.log('База данных подключена');
 });
-
-const { login, createUser } = require('./controllers/users');
-const { validateUser } = require('./middlewares/requestValidation');
-const auth = require('./middlewares/auth');
-const NotFoundError = require('./errors/not-found-err');
 
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -30,20 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(corsHandler);
 app.use(requestLogger);
 
-app.post('/signin', validateUser, login);
-app.post('/signup', validateUser, createUser);
-
-app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/movies', require('./routes/movies'));
-
-app.get('/signout', (req, res) => {
-  res.status(200).clearCookie('jwt').send({ message: 'Выход' });
-});
-
-app.use('/', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
-});
+app.use('/', routes);
 
 app.use(errorLogger);
 app.use(errors());
