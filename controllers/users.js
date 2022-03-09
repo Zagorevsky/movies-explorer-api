@@ -34,7 +34,7 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => res.status(201).send({ _id: user._id, email: user.email }))
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError('Переданы некорректные данные'));
+        next(new ConflictError('Неправильная почта или пароль'));
       } else {
         next(err);
       }

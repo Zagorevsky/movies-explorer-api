@@ -31,12 +31,16 @@ module.exports.deleteMovie = (req, res, next) => {
     .findById(req.params.id)
     .orFail(new NotFoundError('Фильм не найдена'))
     .then((movie) => {
-      if (movie.owner.toString() === req.user._id) {
-        movie.remove()
-          .then((removeMovie) => res.send(removeMovie));
-      } else {
-        throw new ForbiddenError('Попытка удалить чужой фильм');
+      if (movie.owner.toString() === req.user._id.toString()) {
+        return movie.remove()
+          .then(() => res.status(200).send({ message: 'Фильм удален' }));
       }
+      throw new ForbiddenError('Попытка удалить чужой фильм');
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.kind === 'ObjectId') {
+        next(new BadRequestError('Невалидный id'));
+      }
+      next(err);
+    });
 };
