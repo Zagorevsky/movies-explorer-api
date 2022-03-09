@@ -8,6 +8,7 @@ const ConflictError = require('../errors/conflict-err');
 
 const { JWT_SECRET } = require('../config');
 
+// получить данные пользователя
 module.exports.getCurrentUser = (req, res, next) => {
   const userId = req.user._id;
   User.findById(userId)
@@ -40,7 +41,7 @@ module.exports.createUser = (req, res, next) => {
     });
 };
 
-// изменение данных пользователя - name
+// изменение данных пользователя
 module.exports.updateUser = (req, res, next) => {
   const { name, email } = req.body;
   User

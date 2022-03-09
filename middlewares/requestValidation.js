@@ -8,6 +8,7 @@ const urlValidation = (value) => {
   return value;
 };
 
+// проверяем запрос создания пользователя
 module.exports.validateUser = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
@@ -16,13 +17,15 @@ module.exports.validateUser = celebrate({
   }),
 });
 
+// проверяем запрос изменения пользователя
 module.exports.validateUserUpdate = celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
-    password: Joi.string().required().min(8),
+    email: Joi.string().required().email(),
   }),
 });
 
+// проверяем запрос создания фильма
 module.exports.validateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
@@ -40,8 +43,24 @@ module.exports.validateMovie = celebrate({
   }),
 });
 
+// проверяем id фильма
 module.exports.validateIdMovie = celebrate({
   params: Joi.object().keys({
     id: Joi.string().hex().length(24),
+  }),
+});
+
+// проверяем запрос авторизации
+module.exports.validationLogin = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email(),
+    password: Joi.string().required(),
+  }),
+});
+
+// проверяем _id пользователя
+module.exports.validationIdUser = celebrate({
+  params: Joi.object().keys({
+    _id: Joi.string().alphanum().length(24).hex(),
   }),
 });
