@@ -34,7 +34,7 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => res.status(201).send({ _id: user._id, email: user.email }))
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError('Неправильная почта или пароль'));
+        next(new ConflictError('Данный почтовый ящик уже используется'));
       } else {
         next(err);
       }
@@ -53,7 +53,7 @@ module.exports.updateUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Неправильная почта или пароль'));
       } if (err.code === 11000) {
-        throw new ConflictError('Пользователь с таким email уже существует');
+        next(new ConflictError('Пользователь с таким email уже существует'));
       } else { next(err); }
     });
 };
