@@ -6,7 +6,7 @@ const AuthorizationError = require('../errors/authorization-error');
 const BadRequestError = require('../errors/bad-request-err');
 const ConflictError = require('../errors/conflict-err');
 
-const { JWT_SECRET } = require('../config');
+// const { JWT_SECRET } = require('../config');
 
 // получить данные пользователя
 module.exports.getCurrentUser = (req, res, next) => {
@@ -26,7 +26,6 @@ module.exports.createUser = (req, res, next) => {
   const {
     name, email, password,
   } = req.body;
-  console.log(req.body);
   bcrypt.hash(password, 10)
     .then((hash) => User.create({
       name, email, password: hash,
@@ -65,12 +64,12 @@ module.exports.login = (req, res, next) => {
   return User
     .findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+      const token = jwt.sign({ _id: user._id }, );
       res
         .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7, // срок жизни куки 7 дней
-          httpOnly: true,
-          sameSite: false,
+          // httpOnly: true,
+          // sameSite: false,
         })
         .send({ data: user.toJSON() });
     })
