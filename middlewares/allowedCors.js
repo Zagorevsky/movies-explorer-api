@@ -4,6 +4,7 @@ const allowedCors = [
   'http://178.154.223.233',
   'http://kino-exp.students.nomoredomains.xyz',
   'https://kino-exp.students.nomoredomains.xyz',
+  'http://localhost:3000',
 ];
 
 module.exports = (req, res, next) => {
