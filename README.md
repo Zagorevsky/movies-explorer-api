@@ -1,25 +1,49 @@
 # Movies-explorer-api
-## Дипломная работа
-*[ в рамках обучения Яндекс-Практикум по курсу Веб-разработчик]*
+### *Учебный проект от [Яндекс.Практикум](https://practicum.yandex.ru/web/)*
 
+## Описание проекта
+ Movies-explorer-api - бэкенд часть приложения со следующими возможностями: авторизации и регистрации пользователей, операции с фильмами и пользователями.
 
-# movies-explorer server
+## Функционал:
+- Роуты для пользователей:
+  - GET /users/me — возвращает информацию о пользователе;
+  - PATCH /users/me — обновляет информацию о пользователе.
 
-## Применяемые технологии
+- Роуты для фильмов:
+  - GET /movies — возвращает все фильмы из базы;
+  - POST /movies — создаёт фильм;
+  - DELETE /movies/:movieId — удаляет фильм по _id.
 
-* Node.js
-* Express
-* Postman
-* MongoDB
-* Mongoose
+## Стек технологий:
+- Node.js
+- Express
+- MongoDB
+- JavaScript
 
+## Языки:
+- JavaScript
 
-## Запуск:
+## Библиотеки:
+- Express
 
-* `npm i` - устанавливаем зависимости
-* `npm run dev` - для запуска сервера с hot-reload
-* `npm run start` - для запуска сервера
+## База данных:
+- MongoDB
 
----
+## Установка и запуск проекта:
+Клонировать репозиторий:
+
+    git clone https://github.com/zagorevsky/movies-explorer-api.git
+
+Установить зависимости:
+
+    npm install
+
+Запустить сервер:
+
+    npm run start
+
+Запустить сервер с hot-reload:
+
+    npm run dev
 
 #### Домен приложения: https://api.kino-exp.students.nomoredomains.xyz
